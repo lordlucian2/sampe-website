@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const links = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
@@ -12,10 +11,9 @@ const Navbar = () => {
     { name: "Quote", path: "/quote" },
     { name: "Contact", path: "/contact" },
   ];
-
   return (
     <>
-      <div className="bg-darker text-white py-2 px-4 flex justify-between items-center text-sm flex-wrap">
+      <div className="bg-darker text-white py-2 px-4 flex justify-between text-sm flex-wrap gap-2">
         <span>📍 Monrovia, Liberia</span>
         <div className="space-x-3">
           <a href="tel:+231880374248" className="text-primary">📞 +231880374248</a>
@@ -28,32 +26,27 @@ const Navbar = () => {
             SAMPE<span className="text-primary">®</span>
           </Link>
           <div className="hidden md:flex space-x-6">
-            {links.map((link) => (
+            {links.map((l) => (
               <NavLink
-                key={link.path}
-                to={link.path}
+                key={l.path}
+                to={l.path}
                 className={({ isActive }) =>
-                  isActive ? "text-primary font-semibold" : "text-dark hover:text-primary"
+                  isActive ? "text-primary font-semibold" : "hover:text-primary"
                 }
               >
-                {link.name}
+                {l.name}
               </NavLink>
             ))}
           </div>
-          <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
+          <button className="md:hidden" onClick={() => setOpen(!open)}>
+            {open ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
           </button>
         </div>
-        {isOpen && (
-          <div className="md:hidden bg-white border-t py-4 px-4 flex flex-col space-y-3">
-            {links.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                onClick={() => setIsOpen(false)}
-                className="block text-dark hover:text-primary"
-              >
-                {link.name}
+        {open && (
+          <div className="md:hidden bg-white border-t p-4 flex flex-col space-y-3">
+            {links.map((l) => (
+              <NavLink key={l.path} to={l.path} onClick={() => setOpen(false)} className="block">
+                {l.name}
               </NavLink>
             ))}
           </div>
@@ -62,5 +55,4 @@ const Navbar = () => {
     </>
   );
 };
-
 export default Navbar;

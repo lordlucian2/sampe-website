@@ -3,6 +3,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FloatingButtons from "./components/FloatingButtons";
+import FAQ from "./components/FAQ";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -24,6 +25,10 @@ function App() {
             <Route path="/quote" element={<Quote />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
+          <div className="container mx-auto px-4 py-12">
+            <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+            <FAQ />
+          </div>
         </main>
         <Footer />
         <FloatingButtons />
