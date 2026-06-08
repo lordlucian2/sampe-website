@@ -1,30 +1,15 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+
 const About = () => (
   <>
-    <Helmet>
-      <title>About SAMPE – Trusted Welding & Construction in Liberia</title>
-      <meta name="description" content="Sheriff Abraham Multipurpose Enterprise – professional welding, furniture, and construction services in Monrovia, Liberia." />
-    </Helmet>
+    <Helmet><title>About SAMPE – 14+ Years of Welding & Construction Excellence in Liberia</title></Helmet>
     <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold mb-6">About Sheriff Abraham Multipurpose Enterprise</h1>
-      <div className="grid md:grid-cols-2 gap-12">
-        <div>
-          <p className="text-gray-700 mb-4">
-            <strong>SAMPE</strong> is a leading provider of welding, metal fabrication, custom furniture, and general construction services across Liberia.
-            Founded by <strong>Abraham V. Sheriff</strong>, our mission is to deliver strong, reliable, and affordable solutions for residential, commercial, and institutional projects.
-          </p>
-          <p className="text-gray-700 mb-4">
-            We combine modern techniques with local craftsmanship to create durable gates, furniture, and buildings that stand the test of time.
-          </p>
-          <p className="text-gray-700">
-            📞 Call us today for a free consultation: <a href="tel:+231880374248" className="text-primary">+231880374248</a>
-          </p>
-        </div>
-        <div>
-          <img src="https://images.unsplash.com/photo-1581092335871-4e6e7b9a1b9a?w=600&h=400&fit=crop" className="rounded-2xl shadow" alt="SAMPE workshop" />
-          <p className="text-center text-sm text-gray-500 mt-2">Our workshop in Monrovia</p>
-        </div>
-      </div>
+      <div className="text-center mb-16"><h1 className="text-5xl font-bold mb-4">FORGING THE FUTURE OF LIBERIA</h1><p className="text-xl text-gray-600 max-w-3xl mx-auto">Precision welding, bespoke furniture, and general construction executed with the uncompromising strength of industrial steel and the warmth of custom wood.</p></div>
+      <div className="grid md:grid-cols-2 gap-12 mb-20"><div><h2 className="text-3xl font-bold mb-4">OUR STORY</h2><p className="text-gray-700 mb-4">Since its inception in 2010, Sheriff Abraham Multipurpose Enterprise (SAMPE) has been a cornerstone of Liberia’s structural development. What began as a small welding shop in Monrovia has evolved into a multi-disciplinary industrial powerhouse.</p><blockquote className="border-l-4 border-primary pl-4 italic text-gray-600">“We don’t just build structures; we build the foundations of a growing nation. Every weld is a promise of safety, and every piece of furniture is a testament to our heritage.” – Abraham V. Sheriff, Founder</blockquote><div className="flex gap-8 mt-6"><div><span className="text-4xl font-bold text-primary">14+</span><p>YEARS OF EXCELLENCE</p></div><div><span className="text-4xl font-bold text-primary">500+</span><p>PROJECTS BUILT</p></div></div></div><div><img src="https://images.unsplash.com/photo-1581092335871-4e6e7b9a1b9a?w=600&h=400&fit=crop" className="rounded-2xl shadow" alt="SAMPE workshop" /></div></div>
+      <div className="bg-gray-50 rounded-2xl p-8 mb-20"><h2 className="text-3xl font-bold text-center mb-8">OUR CORE VALUES</h2><div className="grid md:grid-cols-3 gap-8"><div><h3 className="text-xl font-bold text-primary">INTEGRITY</h3><p>Transparency is our blueprint. We operate with radical honesty, ensuring every client understands the process, materials, and timeline.</p></div><div><h3 className="text-xl font-bold text-primary">QUALITY</h3><p>We adhere to international structural standards. Precision isn’t an option – it’s the fundamental requirement for everything that leaves our workshop.</p></div><div><h3 className="text-xl font-bold text-primary">SAFETY</h3><p>The safety of our team and the longevity of our construction are paramount. We cultivate a culture where “good enough” is never safe enough.</p></div></div></div>
+      <div className="mb-20"><h2 className="text-3xl font-bold text-center mb-12">MEET THE LEADERSHIP</h2><div className="grid md:grid-cols-4 gap-6 text-center"><div><img src="https://randomuser.me/api/portraits/men/32.jpg" className="w-32 h-32 rounded-full mx-auto mb-3" alt="Abraham V. Sheriff"/><h3 className="font-bold">ABRAHAM V. SHERIFF</h3><p className="text-gray-600">FOUNDER & CEO</p></div><div><img src="https://randomuser.me/api/portraits/women/68.jpg" className="w-32 h-32 rounded-full mx-auto mb-3" alt="Elena Wright"/><h3 className="font-bold">ELENA WRIGHT</h3><p className="text-gray-600">HEAD OF OPERATIONS</p></div><div><img src="https://randomuser.me/api/portraits/men/45.jpg" className="w-32 h-32 rounded-full mx-auto mb-3" alt="David Koneh"/><h3 className="font-bold">DAVID KONEH</h3><p className="text-gray-600">MASTER CRAFTSMAN</p></div><div><img src="https://randomuser.me/api/portraits/men/76.jpg" className="w-32 h-32 rounded-full mx-auto mb-3" alt="Marcus Tarpeh"/><h3 className="font-bold">MARCUS TARPEH</h3><p className="text-gray-600">SITE SUPERVISOR</p></div></div></div>
+      <div className="text-center bg-darker text-white rounded-2xl p-12"><h2 className="text-3xl font-bold mb-4">Ready to Build With Precision?</h2><p className="mb-6">From custom industrial furniture to large-scale structural welding, our team is ready to bring your vision to life.</p><div className="flex justify-center gap-4"><Link to="/quote" className="bg-primary px-6 py-3 rounded-full">START YOUR PROJECT</Link><Link to="/gallery" className="border border-white px-6 py-3 rounded-full">VIEW OUR PORTFOLIO</Link></div></div>
     </div>
   </>
 );

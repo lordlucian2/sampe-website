@@ -4,8 +4,11 @@ export default {
     extend: {
       colors: {
         primary: "#FF6B00",
-        dark: "#222222",
-        darker: "#111111",
+        secondary: "#0EA5E9",
+        accent: "#FACC15",
+        dark: "#111827",
+        darker: "#0B1120",
+        surface: "#F8FAFC",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
@@ -14,4 +17,4 @@ export default {
     },
   },
   plugins: [],
-}
+};

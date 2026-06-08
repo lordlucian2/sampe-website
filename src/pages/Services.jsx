@@ -1,31 +1,14 @@
 import { Helmet } from "react-helmet-async";
-const categories = [
-  { title: "Welding & Metal Fabrication", items: ["Iron doors", "Security gates", "Window bars", "Custom metal frames", "Structural welding", "Repairs & installation"], img: "https://images.unsplash.com/photo-1581612629679-7d8a7b9b8b1c?w=400&h=300&fit=crop" },
-  { title: "General Furniture", items: ["Household furniture (beds, tables, chairs)", "Office furniture (desks, cabinets)", "Custom designs (any size, any style)", "Restaurant & hotel furniture"], img: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=300&fit=crop" },
-  { title: "General Construction", items: ["Building construction (residential & commercial)", "Structural installations", "Renovations & repairs", "On-site project management"], img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop" },
-];
+import { Link } from "react-router-dom";
+
 const Services = () => (
   <>
-    <Helmet>
-      <title>Services – Welding, Furniture, Construction | SAMPE Liberia</title>
-      <meta name="description" content="Complete list of services: metal fabrication, custom furniture, construction, repairs, and installation in Monrovia." />
-    </Helmet>
+    <Helmet><title>Services – Welding, Furniture, Construction | SAMPE Liberia</title></Helmet>
     <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold mb-12">Our Services</h1>
-      <div className="grid md:grid-cols-3 gap-8">
-        {categories.map((cat) => (
-          <div key={cat.title} className="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-lg transition">
-            <img src={cat.img} className="h-48 w-full object-cover rounded-xl mb-4" alt={cat.title} />
-            <h2 className="text-2xl font-bold mb-4 text-primary">{cat.title}</h2>
-            <ul className="list-disc list-inside space-y-1 text-gray-700">
-              {cat.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <p className="mt-4 text-sm text-gray-500">📞 Free quotes – call <a href="tel:+231880374248" className="text-primary">+231880374248</a></p>
-          </div>
-        ))}
-      </div>
+      <div className="text-center mb-16"><h1 className="text-5xl font-bold mb-4">Expert Solutions for Every Project</h1><p className="text-xl text-gray-600">From structural steel to bespoke cabinetry, we combine technical precision with artistic flair.</p><div className="flex justify-center gap-4 mt-6"><Link to="/quote" className="bg-primary px-6 py-2 rounded-full text-white">REQUEST A QUOTE</Link><Link to="/gallery" className="border border-primary text-primary px-6 py-2 rounded-full">VIEW PORTFOLIO</Link></div></div>
+      <div className="grid md:grid-cols-3 gap-12 mb-20"><div className="bg-gray-50 p-6 rounded-2xl"><h2 className="text-2xl font-bold text-primary mb-3">Welding & Fabrication</h2><p className="mb-3">Precision metalwork designed for durability and aesthetic impact.</p><ul className="list-disc list-inside space-y-1"><li>Custom Iron Doors & Gates</li><li>Security Window Bars & Fencing</li><li>Bespoke Architectural Metalwork</li></ul><Link to="/quote" className="inline-block mt-4 text-primary font-semibold">REQUEST A QUOTE →</Link></div><div className="bg-gray-50 p-6 rounded-2xl"><h2 className="text-2xl font-bold text-primary mb-3">Bespoke Furniture</h2><p>Custom bed frames, office suites, and sustainable materials.</p><div className="mt-3 space-y-2"><p><strong>CUSTOM BED FRAMES</strong><br/>Handcrafted solid wood and steel frames.</p><p><strong>OFFICE SUITES</strong><br/>Professional offices and desks for your business.</p></div></div><div className="bg-gray-50 p-6 rounded-2xl"><h2 className="text-2xl font-bold text-primary mb-3">General Construction & Renovations</h2><ul className="list-disc list-inside"><li>New Projects – ground‑up construction</li><li>Renovations – structural modifications</li><li>Structural Installations – beams, support systems</li></ul><Link to="/quote" className="inline-block mt-4 text-primary font-semibold">GET QUOTE →</Link></div></div>
+      <div className="bg-darker text-white rounded-2xl p-8 mb-16"><h2 className="text-2xl font-bold text-center mb-8">OUR METHODOLOGY: PRECISE EXECUTION FROM CONCEPT TO COMPLETION</h2><div className="grid md:grid-cols-4 gap-6 text-center"><div><div className="text-3xl font-bold text-primary">1.</div><h3 className="font-bold">CONSULTATION</h3><p className="text-sm">Site analysis and requirements gathering</p></div><div><div className="text-3xl font-bold text-primary">2.</div><h3 className="font-bold">DESIGN</h3><p className="text-sm">CAD drafting and 3D modeling</p></div><div><div className="text-3xl font-bold text-primary">3.</div><h3 className="font-bold">FABRICATION</h3><p className="text-sm">Precision crafting in our shop</p></div><div><div className="text-3xl font-bold text-primary">4.</div><h3 className="font-bold">INSTALLATION</h3><p className="text-sm">Seamless on‑site assembly</p></div></div></div>
+      <div className="text-center"><Link to="/quote" className="bg-primary text-white px-8 py-3 rounded-full font-bold text-lg">REQUEST A FULL QUOTE</Link></div>
     </div>
   </>
 );

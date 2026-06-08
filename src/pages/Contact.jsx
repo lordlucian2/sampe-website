@@ -1,47 +1,18 @@
 import { Helmet } from "react-helmet-async";
-const Contact = () => (
-  <>
-    <Helmet><title>Contact SAMPE – Welding, Furniture, Construction in Monrovia</title></Helmet>
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
-      <div className="grid md:grid-cols-2 gap-12">
-        <div className="space-y-6">
-          <div>
-            <span className="font-bold text-primary text-xl">📞 Phone</span>
-            <br />
-            <a href="tel:+231880374248" className="text-dark text-2xl font-semibold">+231880374248</a>
-          </div>
-          <div>
-            <span className="font-bold text-primary text-xl">💬 WhatsApp</span>
-            <br />
-            <a href="https://wa.me/231775094389" className="text-dark text-2xl font-semibold">+231775094389</a>
-          </div>
-          <div>
-            <span className="font-bold text-primary text-xl">📍 Address</span>
-            <br />
-            Monrovia, Montserrado County, Liberia
-            <br />
-            (Behind SKD Stadium, Paynesville)
-          </div>
-          <div>
-            <span className="font-bold text-primary text-xl">🕒 Working Hours</span>
-            <br />
-            Monday – Saturday: 8:00 AM – 6:00 PM
-            <br />
-            Sunday: Closed
-          </div>
-          <div>
-            <span className="font-bold text-primary text-xl">📧 Email</span>
-            <br />
-            <a href="mailto:info@sampe.com">info@sampe.com</a>
-          </div>
-          <a href="tel:+231880374248" className="inline-block bg-primary text-white px-8 py-3 rounded-full font-bold mt-4">Click to Call Now</a>
-        </div>
-        <div className="h-96 rounded-2xl overflow-hidden shadow">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260214375!2d-10.796788!3d6.310581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xf06a2b9e1e8e2b9%3A0x8b9a7c1e2f3d4a5!2sMonrovia%2C%20Liberia!5e0!3m2!1sen!2sus!4v1690000000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowFullScreen loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-  </>
-);
+import { useState } from "react";
+
+const Contact = () => {
+  const [form, setForm] = useState({ name: "", email: "", phone: "", category: "Industrial Welding", desc: "" });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const msg = `Contact form%0AName: ${form.name}%0AEmail: ${form.email}%0APhone: ${form.phone}%0ACategory: ${form.category}%0ADescription: ${form.desc}`;
+    window.open(`https://wa.me/231775094389?text=${encodeURIComponent(msg)}`, "_blank");
+  };
+  return (
+    <>
+      <Helmet><title>Contact SAMPE – Free Quote & Consultation | Monrovia, Liberia</title></Helmet>
+      <div className="container mx-auto px-4 py-16"><div className="grid md:grid-cols-2 gap-12"><div><h1 className="text-4xl font-bold mb-4">Let's Build Something Together</h1><p className="text-gray-600 mb-8">From custom steel fabrication to large-scale construction projects in Liberia, our team delivers structural integrity and precision craftsmanship.</p><form onSubmit={handleSubmit} className="space-y-4"><input type="text" placeholder="Full Name" className="w-full border p-3 rounded-lg" required onChange={e=>setForm({...form,name:e.target.value})} /><input type="email" placeholder="Email Address" className="w-full border p-3 rounded-lg" onChange={e=>setForm({...form,email:e.target.value})} /><input type="tel" placeholder="Phone Number" className="w-full border p-3 rounded-lg" required onChange={e=>setForm({...form,phone:e.target.value})} /><select className="w-full border p-3 rounded-lg" onChange={e=>setForm({...form,category:e.target.value})}><option>Industrial Welding</option><option>Custom Furniture</option><option>General Construction</option></select><textarea rows="4" placeholder="Tell us about your project requirements..." className="w-full border p-3 rounded-lg" onChange={e=>setForm({...form,desc:e.target.value})}></textarea><button type="submit" className="bg-primary w-full py-3 rounded-lg font-bold text-white">Send Request →</button></form></div><div className="bg-gray-50 p-6 rounded-2xl"><h2 className="text-2xl font-bold mb-4">Contact Details</h2><div className="space-y-4"><div><span className="font-bold">📞 PHONE</span><br/><a href="tel:+231880374248">+231 880 374 248</a></div><div><span className="font-bold">💬 WHATSAPP</span><br/><a href="https://wa.me/231775094389">Chat with us now</a></div><div><span className="font-bold">✉️ EMAIL</span><br/><a href="mailto:info@sampe.com">info@sampe.com</a></div><div><span className="font-bold">📍 OFFICE & WORKSHOP</span><br/>Monrovia, Montserrado County, Liberia</div></div><h3 className="text-xl font-bold mt-8 mb-4">Common Questions</h3><details className="mb-2"><summary className="font-semibold">How is project pricing calculated?</summary><p className="mt-1 text-sm">Based on material costs, labor hours, and complexity. We provide detailed line-item quotes.</p></details><details className="mb-2"><summary className="font-semibold">Do you handle on‑site installation?</summary><p className="mt-1 text-sm">Yes, we deliver and install for all construction and industrial projects across Montserrado County.</p></details><details className="mb-2"><summary className="font-semibold">What is typical turnaround time?</summary><p className="mt-1 text-sm">Small furniture: 1-2 weeks. Larger projects scheduled after design approval.</p></details><details><summary className="font-semibold">Is emergency repair available?</summary><p className="mt-1 text-sm">Yes, priority welding repair for industrial clients. Call our phone line.</p></details></div></div></div>
+    </>
+  );
+};
 export default Contact;

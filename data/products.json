@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "title": "Custom Security Gate",
+    "category": "Welding",
+    "image": "https://images.unsplash.com/photo-1517632298127-1aa7f8c6d55d?w=1200&h=800&fit=crop",
+    "description": "Heavy-duty steel gates and ornamental fencing with precision welding for lasting security."
+  },
+  {
+    "id": "2",
+    "title": "Executive Office Cabinet",
+    "category": "Furniture",
+    "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&h=800&fit=crop",
+    "description": "Custom wood and metal office storage solutions built to order for modern workspaces."
+  },
+  {
+    "id": "3",
+    "title": "Industrial Support Frame",
+    "category": "Construction",
+    "image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&h=800&fit=crop",
+    "description": "Structural framework and installation support for warehouses, workshops, and factories."
+  },
+  {
+    "id": "4",
+    "title": "Commercial Kitchen Counter",
+    "category": "Furniture",
+    "image": "https://images.unsplash.com/photo-1582582494700-82a230cdd1fc?w=1200&h=800&fit=crop",
+    "description": "Durable custom counters and workstations for restaurants, schools, and offices."
+  },
+  {
+    "id": "5",
+    "title": "Gate Repair & Maintenance",
+    "category": "Welding",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1200&h=800&fit=crop",
+    "description": "On-site welding repairs, reinforcements, and polish finishes for existing installations."
+  }
+]
