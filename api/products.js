@@ -1,11 +1,22 @@
 import fs from "fs/promises";
 import path from "path";
+import { Pool } from "pg";
 
 const PRODUCTS_PATH = path.join(process.cwd(), "data", "products.json");
+const CMS_PASSWORD = process.env.CMS_PASSWORD || "sampeadmin";
+const DATABASE_URL = process.env.DATABASE_URL;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_REPOSITORY = process.env.GITHUB_REPOSITORY;
 const GITHUB_BRANCH = process.env.GITHUB_BRANCH || "main";
-const CMS_PASSWORD = process.env.CMS_PASSWORD || "sampeadmin";
+
+let pool;
+const getPool = () => {
+  if (!DATABASE_URL) return null;
+  if (!pool) {
+    pool = new Pool({ connectionString: DATABASE_URL });
+  }
+  return pool;
+};
 
 const parseBody = async (req) => {
   const chunks = [];
@@ -64,7 +75,43 @@ const saveToGitHub = async (products, sha) => {
   }
 };
 
+const ensureProductsTable = async () => {
+  const pool = getPool();
+  if (!pool) return;
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS products (
+      id text PRIMARY KEY,
+      title text NOT NULL,
+      category text NOT NULL,
+      image text NOT NULL,
+      description text NOT NULL,
+      created_at timestamptz DEFAULT now()
+    )
+  `);
+};
+
+const readProductsDb = async () => {
+  const pool = getPool();
+  if (!pool) throw new Error("Database not configured.");
+  await ensureProductsTable();
+  const result = await pool.query("SELECT id, title, category, image, description FROM products ORDER BY created_at DESC");
+  return result.rows;
+};
+
+const writeProductDb = async (product) => {
+  const pool = getPool();
+  if (!pool) throw new Error("Database not configured.");
+  await ensureProductsTable();
+  await pool.query(
+    "INSERT INTO products (id, title, category, image, description) VALUES ($1, $2, $3, $4, $5)",
+    [product.id, product.title, product.category, product.image, product.description]
+  );
+};
+
 const readProducts = async () => {
+  if (DATABASE_URL) {
+    return await readProductsDb();
+  }
   if (GITHUB_TOKEN && GITHUB_REPOSITORY) {
     const { products } = await loadFromGitHub();
     return products;
@@ -72,13 +119,17 @@ const readProducts = async () => {
   return await readProductsFile();
 };
 
-const writeProducts = async (products) => {
+const writeProduct = async (product) => {
+  if (DATABASE_URL) {
+    return await writeProductDb(product);
+  }
   if (GITHUB_TOKEN && GITHUB_REPOSITORY) {
-    const { sha } = await loadFromGitHub();
+    const { products, sha } = await loadFromGitHub();
+    products.unshift(product);
     await saveToGitHub(products, sha);
     return;
   }
-  await saveProductsFile(products);
+  throw new Error("Write operations are not supported in this environment.");
 };
 
 const handler = async (req, res) => {
@@ -97,7 +148,6 @@ const handler = async (req, res) => {
       if (!title || !category || !image || !description) {
         return res.writeHead(400, { "Content-Type": "application/json" }).end(JSON.stringify({ error: "All fields are required." }));
       }
-      const products = await readProducts();
       const newProduct = {
         id: `${Date.now()}`,
         title,
@@ -106,8 +156,7 @@ const handler = async (req, res) => {
         description,
         createdAt: new Date().toISOString(),
       };
-      products.unshift(newProduct);
-      await writeProducts(products);
+      await writeProduct(newProduct);
       return res.writeHead(201, { "Content-Type": "application/json" }).end(JSON.stringify(newProduct));
     }
 
