@@ -1,9 +1,11 @@
 import fs from "fs/promises";
 import path from "path";
+import jwt from "jsonwebtoken";
 import { Pool } from "pg";
 
 const PRODUCTS_PATH = path.join(process.cwd(), "data", "products.json");
 const CMS_PASSWORD = process.env.CMS_PASSWORD || "sampeadmin";
+const JWT_SECRET = process.env.JWT_SECRET || "default-secret";
 const DATABASE_URL = process.env.DATABASE_URL;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_REPOSITORY = process.env.GITHUB_REPOSITORY;
@@ -25,6 +27,17 @@ const parseBody = async (req) => {
   }
   const raw = Buffer.concat(chunks).toString("utf8");
   return raw ? JSON.parse(raw) : {};
+};
+
+const verifyToken = (req) => {
+  const auth = req.headers.authorization;
+  if (!auth?.startsWith("Bearer ")) return null;
+  const token = auth.split(" ")[1];
+  try {
+    return jwt.verify(token, JWT_SECRET);
+  } catch {
+    return null;
+  }
 };
 
 const readProductsFile = async () => {
@@ -140,11 +153,12 @@ const handler = async (req, res) => {
     }
 
     if (req.method === "POST") {
-      const body = await parseBody(req);
-      const { password, title, category, image, description } = body;
-      if (password !== CMS_PASSWORD) {
-        return res.writeHead(401, { "Content-Type": "application/json" }).end(JSON.stringify({ error: "Invalid admin password." }));
+      const user = verifyToken(req);
+      if (!user) {
+        return res.writeHead(401, { "Content-Type": "application/json" }).end(JSON.stringify({ error: "Unauthorized." }));
       }
+      const body = await parseBody(req);
+      const { title, category, image, description } = body;
       if (!title || !category || !image || !description) {
         return res.writeHead(400, { "Content-Type": "application/json" }).end(JSON.stringify({ error: "All fields are required." }));
       }

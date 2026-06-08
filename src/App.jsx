@@ -9,6 +9,7 @@ import Services from "./pages/Services";
 import Gallery from "./pages/Gallery";
 import Products from "./pages/Products";
 import Admin from "./pages/Admin";
+import AdminDashboard from "./pages/AdminDashboard";
 import Quote from "./pages/Quote";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
@@ -27,6 +28,7 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/quote" element={<Quote />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />
